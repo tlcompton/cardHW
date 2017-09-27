@@ -1,14 +1,40 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Cool Cards!
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <p>Card Count: {{cardCount()}}</p>
+  <ion-card *ngFor="let card of cards">
+    <img src="../../assets/img/{{card.imgPath}}"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{card.title}}
+      </ion-card-title>
+      <p>{{card.desc}}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button clear icon-start (click)="clickFav(card)">
+          <ion-icon [name]="(card.favorited) ? 'heart' : 'heart-outline'"></ion-icon>
+          Fav
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button clear icon-start (click)="clickShared(card)">
+          <ion-icon [name]="(card.shared) ? 'ios-share' : 'ios-share-outline'" ></ion-icon>
+          Share
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button clear icon-start (click)="deleteCard(card)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>
